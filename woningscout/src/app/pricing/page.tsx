@@ -6,56 +6,58 @@ import Link from 'next/link';
 
 const plans = [
   {
+    id: 'plan-free',
     name: 'Gratis',
     price: '€0',
     period: '/maand',
     description: 'Voor starters',
     icon: Zap,
     features: [
-      '10 zoekopdrachten per dag',
+      'Maximaal 3 zoekopdrachten per dag',
       'Basis filters',
-      'Email alerts (1x per dag)',
-      'Advertenties',
     ],
     cta: 'Gratis starten',
     href: '/login',
     popular: false,
+    tier: 'free',
   },
   {
+    id: 'plan-pro',
     name: 'Pro',
     price: '€9',
     period: '/maand',
     description: 'Voor actieve zoekers',
     icon: Crown,
     features: [
-      'Onbeperkt zoeken',
+      'Maximaal 10 zoekopdrachten per dag',
       'Alle filters',
-      'Instant alerts',
-      'Geen advertenties',
+      'Advertentievrije ervaring',
       'Favorieten opslaan',
       'Prijshistorie bekijken',
+      'Telegram notificaties',
     ],
     cta: 'Start Pro',
     href: '/login',
     popular: true,
+    tier: 'pro',
   },
   {
-    name: 'Business',
+    id: 'plan-ultra',
+    name: 'Ultra',
     price: '€29',
     period: '/maand',
     description: 'Voor professionals',
     icon: Rocket,
     features: [
       'Alles van Pro',
-      'API toegang',
-      'Team accounts (5 users)',
-      'Export naar Excel/CSV',
+      'API-toegang',
       'Priority support',
-      'Custom integraties',
+      'Export naar Excel/CSV',
     ],
-    cta: 'Contact opnemen',
-    href: '/about',
+    cta: 'Start Ultra',
+    href: '/login',
     popular: false,
+    tier: 'ultra',
   },
 ];
 
@@ -70,43 +72,68 @@ export default function PricingPage() {
               Kies jouw plan
             </h1>
             <p className="text-white/50 max-w-xl mx-auto">
-              Van gratis tot premium - er is altijd een plan dat bij je past
+              Van gratis tot premium – er is altijd een plan dat bij je past.
             </p>
           </div>
 
           {/* Plans grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 items-center">
             {plans.map((plan) => {
               const Icon = plan.icon;
+              const isPro = plan.tier === 'pro';
+              const isUltra = plan.tier === 'ultra';
+
               return (
                 <div
                   key={plan.name}
-                  className={`relative glass rounded-2xl p-6 flex flex-col ${
-                    plan.popular
-                      ? 'ring-2 ring-[#e94560] bg-white/10'
-                      : ''
+                  id={plan.id}
+                  className={`relative glass rounded-2xl p-6 flex flex-col transition-all duration-300 ${
+                    isPro
+                      ? 'ring-2 ring-[#e94560] bg-white/10 md:scale-105 md:py-8 shadow-lg shadow-[#e94560]/20'
+                      : isUltra
+                      ? 'ring-1 ring-[#a855f7]/50 bg-white/5 hover:ring-[#a855f7]'
+                      : 'hover:bg-white/5'
                   }`}
                 >
-                  {/* Popular badge */}
-                  {plan.popular && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-[#e94560] rounded-full text-xs font-medium">
+                  {/* Popular badge - only for Pro */}
+                  {isPro && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#e94560] rounded-full text-xs font-semibold whitespace-nowrap shadow-lg shadow-[#e94560]/30">
                       Meest gekozen
                     </div>
                   )}
 
                   {/* Icon */}
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${
-                    plan.popular ? 'btn-gradient' : 'bg-white/10'
-                  }`}>
+                  <div
+                    className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${
+                      isPro
+                        ? 'btn-gradient shadow-lg shadow-[#e94560]/30'
+                        : isUltra
+                        ? 'bg-gradient-to-br from-[#a855f7] to-[#6366f1]'
+                        : 'bg-white/10'
+                    }`}
+                  >
                     <Icon className="w-5 h-5 text-white" />
                   </div>
 
-                  {/* Name & Price */}
-                  <h3 className="text-lg font-semibold mb-1">{plan.name}</h3>
+                  {/* Name & Description */}
+                  <h3
+                    className={`text-lg font-semibold mb-1 ${
+                      isPro ? 'text-[#e94560]' : isUltra ? 'text-[#a855f7]' : ''
+                    }`}
+                  >
+                    {plan.name}
+                  </h3>
                   <p className="text-white/50 text-sm mb-4">{plan.description}</p>
 
+                  {/* Price */}
                   <div className="mb-6">
-                    <span className="text-3xl font-bold">{plan.price}</span>
+                    <span
+                      className={`text-3xl font-bold ${
+                        isPro ? 'text-white' : isUltra ? 'text-white' : ''
+                      }`}
+                    >
+                      {plan.price}
+                    </span>
                     <span className="text-white/50 text-sm">{plan.period}</span>
                   </div>
 
@@ -114,18 +141,28 @@ export default function PricingPage() {
                   <ul className="space-y-2.5 mb-6 flex-1">
                     {plan.features.map((feature) => (
                       <li key={feature} className="flex items-start gap-2 text-sm">
-                        <Check className="w-4 h-4 text-[#e94560] mt-0.5 flex-shrink-0" />
+                        <Check
+                          className={`w-4 h-4 mt-0.5 flex-shrink-0 ${
+                            isPro
+                              ? 'text-[#e94560]'
+                              : isUltra
+                              ? 'text-[#a855f7]'
+                              : 'text-[#e94560]'
+                          }`}
+                        />
                         <span className="text-white/70">{feature}</span>
                       </li>
                     ))}
                   </ul>
 
-                  {/* CTA */}
+                  {/* CTA Button */}
                   <Link
                     href={plan.href}
                     className={`w-full py-2.5 rounded-lg font-medium text-center text-sm transition-all ${
-                      plan.popular
-                        ? 'btn-gradient hover:shadow-lg hover:shadow-[#e94560]/30'
+                      isPro
+                        ? 'btn-gradient hover:shadow-lg hover:shadow-[#e94560]/40 hover:scale-[1.02]'
+                        : isUltra
+                        ? 'bg-gradient-to-r from-[#a855f7] to-[#6366f1] hover:shadow-lg hover:shadow-[#a855f7]/30 hover:scale-[1.02]'
                         : 'bg-white/10 hover:bg-white/20'
                     }`}
                   >
@@ -136,7 +173,7 @@ export default function PricingPage() {
             })}
           </div>
 
-          {/* FAQ hint */}
+          {/* Contact hint */}
           <div className="mt-10 text-center">
             <p className="text-white/40 text-sm">
               Vragen over prijzen?{' '}
