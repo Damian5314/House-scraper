@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . ./
 
 # Default command: start je scraper
-CMD ["python", "-u", "scraper_playwright.py"]
+CMD ["python", "-u", "scraper.py"]
