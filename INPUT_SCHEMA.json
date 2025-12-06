@@ -1,0 +1,32 @@
+{
+  "title": "Huizen scraper (Funda + Pararius)",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "plaats": {
+      "title": "Plaats / stad",
+      "type": "string",
+      "description": "Bijv. amsterdam, rotterdam, utrecht, etc.",
+      "default": "amsterdam"
+    },
+    "paginas": {
+      "title": "Aantal pagina's per platform",
+      "type": "integer",
+      "description": "Hoeveel resultaatpagina's per site wil je scrapen?",
+      "minimum": 1,
+      "default": 3
+    },
+    "platforms": {
+      "title": "Platforms",
+      "type": "array",
+      "description": "Welke sites wil je scrapen?",
+      "items": {
+        "type": "string",
+        "enum": ["FUNDA", "PARARIUS", "ALL"]
+      },
+      "uniqueItems": true,
+      "default": ["FUNDA", "PARARIUS"]
+    }
+  },
+  "required": []
+}
