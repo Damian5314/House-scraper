@@ -1,32 +1,42 @@
 {
-  "title": "Huizen scraper (Funda + Pararius)",
+  "title": "Huizen scraper input",
+  "description": "Scrapet woningen van Funda en Pararius met Playwright (Python).",
   "type": "object",
   "schemaVersion": 1,
   "properties": {
     "plaats": {
-      "title": "Plaats / stad",
+      "title": "Plaats / regio",
       "type": "string",
-      "description": "Bijv. amsterdam, rotterdam, utrecht, etc.",
+      "description": "Bijv. amsterdam, utrecht, noord-holland. Wordt gebruikt in de URL voor Funda en Pararius.",
       "default": "amsterdam"
     },
     "paginas": {
       "title": "Aantal pagina's per platform",
       "type": "integer",
-      "description": "Hoeveel resultaatpagina's per site wil je scrapen?",
+      "description": "Hoeveel pagina's per platform (Funda, Pararius) moeten worden gescrapet.",
       "minimum": 1,
-      "default": 3
+      "maximum": 100,
+      "default": 5
     },
     "platforms": {
-      "title": "Platforms",
+      "title": "Platforms om te scrapen",
       "type": "array",
-      "description": "Welke sites wil je scrapen?",
+      "description": "Kies één of meerdere platforms.",
       "items": {
         "type": "string",
-        "enum": ["FUNDA", "PARARIUS", "ALL"]
+        "enum": ["FUNDA", "PARARIUS"],
+        "enumTitles": ["Funda", "Pararius"]
       },
       "uniqueItems": true,
+      "minItems": 1,
       "default": ["FUNDA", "PARARIUS"]
+    },
+    "headless": {
+      "title": "Headless browser",
+      "type": "boolean",
+      "description": "Gebruik een headless browser (true) of zichtbare browser (false). Op Apify is headless sterk aangeraden.",
+      "default": true
     }
   },
-  "required": []
+  "required": ["plaats"]
 }

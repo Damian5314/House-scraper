@@ -1,14 +1,17 @@
-FROM apify/actor-python-playwright:3.11
+# Officiële Apify base image met Python + Playwright
+FROM apify/actor-python-playwright:latest
 
-# Werkdirectory binnen de container
-WORKDIR /usr/src/app
+# Zorg dat stdout/err direct worden geflusht (handig voor logs)
+ENV PYTHONUNBUFFERED=1
 
-# Vereisten kopiëren en installeren
+# Eerst alleen requirements kopiëren (beter voor Docker cache)
 COPY requirements.txt ./
+
+# Python dependencies installeren
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Rest van de code kopiëren
+# Actor code kopiëren
 COPY . ./
 
-# Standaard command: run de scraper
-CMD ["python", "scraper_playwright.py"]
+# Default command: start je scraper
+CMD ["python", "-u", "scraper_playwright.py"]
