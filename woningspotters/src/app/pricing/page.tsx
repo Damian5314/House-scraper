@@ -62,7 +62,7 @@ const plans = [
 export default function PricingPage() {
   return (
     <PageTransition>
-      <div className="min-h-screen px-4 py-8">
+      <div className="px-4 py-8 pb-16">
         <div className="max-w-5xl mx-auto">
           {/* Header */}
           <div className="text-center mb-10">
@@ -83,13 +83,13 @@ export default function PricingPage() {
                   key={plan.name}
                   className={`relative glass rounded-2xl p-6 flex flex-col ${
                     plan.popular
-                      ? 'ring-2 ring-[#e94560] bg-white/10'
+                      ? 'ring-2 ring-[#FF7A00] bg-white/10'
                       : ''
                   }`}
                 >
                   {/* Popular badge */}
                   {plan.popular && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-[#e94560] rounded-full text-xs font-medium">
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-[#FF7A00] rounded-full text-xs font-medium">
                       Meest gekozen
                     </div>
                   )}
@@ -114,7 +114,7 @@ export default function PricingPage() {
                   <ul className="space-y-2.5 mb-6 flex-1">
                     {plan.features.map((feature) => (
                       <li key={feature} className="flex items-start gap-2 text-sm">
-                        <Check className="w-4 h-4 text-[#e94560] mt-0.5 flex-shrink-0" />
+                        <Check className="w-4 h-4 text-[#2B7CB3] mt-0.5 flex-shrink-0" />
                         <span className="text-white/70">{feature}</span>
                       </li>
                     ))}
@@ -125,7 +125,7 @@ export default function PricingPage() {
                     href={plan.href}
                     className={`w-full py-2.5 rounded-lg font-medium text-center text-sm transition-all ${
                       plan.popular
-                        ? 'btn-gradient hover:shadow-lg hover:shadow-[#e94560]/30'
+                        ? 'btn-gradient hover:shadow-lg hover:shadow-[#FF7A00]/30'
                         : 'bg-white/10 hover:bg-white/20'
                     }`}
                   >
@@ -140,7 +140,7 @@ export default function PricingPage() {
           <div className="mt-10 text-center">
             <p className="text-white/40 text-sm">
               Vragen over prijzen?{' '}
-              <Link href="/about" className="text-[#e94560] hover:underline">
+              <Link href="/contact" className="text-[#5BA3D0] hover:underline">
                 Neem contact op
               </Link>
             </p>

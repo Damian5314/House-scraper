@@ -130,7 +130,7 @@ export function CompactSearchForm({ onSearch, isLoading }: CompactSearchFormProp
           />
           {selectedCity && (
             <div className="mt-2 text-xs text-white/60">
-              Zoeken in <span className="text-[#e94560] font-medium">{selectedCity}</span>
+              Zoeken in <span className="text-[#FF7A00] font-medium">{selectedCity}</span>
             </div>
           )}
         </div>
@@ -165,7 +165,7 @@ export function CompactSearchForm({ onSearch, isLoading }: CompactSearchFormProp
             <select
               value={filters.minPrijs}
               onChange={(e) => setFilters({ ...filters, minPrijs: e.target.value })}
-              className="w-full px-3 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:border-[#e94560] focus:outline-none appearance-none cursor-pointer pr-8"
+              className="w-full px-3 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:border-[#2B7CB3] focus:outline-none appearance-none cursor-pointer pr-8"
             >
               {minPriceOptions.map((option) => (
                 <option key={option.value} value={option.value} className="bg-[#1a1a2e]">
@@ -180,7 +180,7 @@ export function CompactSearchForm({ onSearch, isLoading }: CompactSearchFormProp
             <select
               value={filters.maxPrijs}
               onChange={(e) => setFilters({ ...filters, maxPrijs: e.target.value })}
-              className="w-full px-3 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:border-[#e94560] focus:outline-none appearance-none cursor-pointer pr-8"
+              className="w-full px-3 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:border-[#2B7CB3] focus:outline-none appearance-none cursor-pointer pr-8"
             >
               {maxPriceOptions.map((option) => (
                 <option key={option.value} value={option.value} className="bg-[#1a1a2e]">
@@ -195,7 +195,7 @@ export function CompactSearchForm({ onSearch, isLoading }: CompactSearchFormProp
             <select
               value={filters.kamers}
               onChange={(e) => setFilters({ ...filters, kamers: e.target.value })}
-              className="w-full px-3 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:border-[#e94560] focus:outline-none appearance-none cursor-pointer pr-8"
+              className="w-full px-3 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:border-[#2B7CB3] focus:outline-none appearance-none cursor-pointer pr-8"
             >
               {kamerOptions.map((option) => (
                 <option key={option.value} value={option.value} className="bg-[#1a1a2e]">
@@ -239,7 +239,7 @@ export function CompactSearchForm({ onSearch, isLoading }: CompactSearchFormProp
           disabled={!canSearch || isLoading}
           className={`w-full py-3 font-semibold rounded-xl flex items-center justify-center gap-2 transition-all ${
             canSearch && !isLoading
-              ? 'btn-gradient shadow-lg shadow-[#e94560]/25 hover:shadow-[#e94560]/40'
+              ? 'btn-gradient shadow-lg shadow-[#FF7A00]/25 hover:shadow-[#FF7A00]/40'
               : 'bg-white/10 text-white/50 cursor-not-allowed'
           }`}
         >

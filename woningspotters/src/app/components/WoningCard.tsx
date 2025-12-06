@@ -84,7 +84,7 @@ export function WoningCard({ woning, index = 0 }: WoningCardProps) {
 
       {/* Content */}
       <div className="p-5 bg-gradient-to-b from-white/5 to-transparent">
-        <h3 className="text-lg font-semibold mb-1 line-clamp-1 group-hover:text-[#e94560] transition-colors text-white">
+        <h3 className="text-lg font-semibold mb-1 line-clamp-1 group-hover:text-[#FF7A00] transition-colors text-white">
           {woning.titel}
         </h3>
 

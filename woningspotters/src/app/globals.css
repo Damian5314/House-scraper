@@ -5,9 +5,11 @@
 @tailwind utilities;
 
 :root {
-  --primary: #e94560;
-  --primary-dark: #d13a54;
-  --primary-light: #ff6b6b;
+  --primary: #2B7CB3;
+  --primary-dark: #1e5a82;
+  --primary-light: #5BA3D0;
+  --accent: #FF7A00;
+  --accent-dark: #E66A00;
   --dark: #1a1a2e;
   --dark-secondary: #16213e;
   --dark-tertiary: #0f3460;
@@ -17,14 +19,15 @@
   box-sizing: border-box;
 }
 
-html, body {
-  overflow: hidden;
-  height: 100%;
+html {
+  min-height: 100%;
+  background: #1a1a2e;
 }
 
 body {
   font-family: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   background: linear-gradient(135deg, var(--dark) 0%, var(--dark-secondary) 50%, var(--dark-tertiary) 100%);
+  background-attachment: fixed;
   min-height: 100vh;
   color: #fff;
   -webkit-font-smoothing: antialiased;
@@ -123,13 +126,24 @@ body {
 
 /* Button gradient */
 .btn-gradient {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, #FF9933 100%);
   transition: all 0.3s ease;
 }
 
 .btn-gradient:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 40px rgba(233, 69, 96, 0.4);
+  box-shadow: 0 10px 40px rgba(255, 122, 0, 0.4);
+}
+
+/* Blue button gradient */
+.btn-gradient-blue {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  transition: all 0.3s ease;
+}
+
+.btn-gradient-blue:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(43, 124, 179, 0.4);
 }
 
 .btn-gradient:active {

@@ -58,7 +58,7 @@ uniform vec3 lineGradient[8];
 uniform int lineGradientCount;
 
 const vec3 BLACK = vec3(0.0);
-const vec3 PINK  = vec3(233.0, 69.0, 96.0) / 255.0;  // #e94560
+const vec3 PINK  = vec3(255.0, 122.0, 0.0) / 255.0;  // #FF7A00 (orange)
 const vec3 BLUE  = vec3(15.0, 52.0, 96.0) / 255.0;   // #0f3460
 
 mat2 rotate(float r) {
@@ -254,7 +254,7 @@ function hexToVec3(hex: string): Vector3 {
 }
 
 export default function FloatingLines({
-  linesGradient = ['#e94560', '#0f3460', '#16213e'],
+  linesGradient = ['#FF7A00', '#2B7CB3', '#0f3460'],
   enabledWaves = ['top', 'middle', 'bottom'],
   lineCount = [6],
   lineDistance = [5],

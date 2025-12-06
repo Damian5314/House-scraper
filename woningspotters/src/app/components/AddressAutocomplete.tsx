@@ -151,7 +151,7 @@ export function AddressAutocomplete({ onSelect, placeholder = "Typ een adres of 
           }}
           onFocus={() => suggestions.length > 0 && setShowSuggestions(true)}
           placeholder={placeholder}
-          className="w-full pl-10 pr-10 py-3 bg-white/5 border border-white/10 rounded-xl text-white text-sm placeholder:text-white/40 focus:border-[#e94560] focus:outline-none transition-colors"
+          className="w-full pl-10 pr-10 py-3 bg-white/5 border border-white/10 rounded-xl text-white text-sm placeholder:text-white/40 focus:border-[#2B7CB3] focus:outline-none transition-colors"
           autoComplete="off"
         />
         {isLoading && (
@@ -169,7 +169,7 @@ export function AddressAutocomplete({ onSelect, placeholder = "Typ een adres of 
 
       {/* Suggestions dropdown */}
       {showSuggestions && suggestions.length > 0 && (
-        <div className="absolute z-50 w-full mt-1 bg-[#1a1a2e]/98 backdrop-blur-xl border border-white/10 rounded-lg overflow-hidden shadow-2xl">
+        <div className="absolute z-50 w-full mt-1 bg-[#1a1a2e] border border-white/20 rounded-lg overflow-hidden shadow-2xl">
           {suggestions.map((suggestion) => {
             const city = extractCity(suggestion.address);
             const addr = suggestion.address;
@@ -180,7 +180,7 @@ export function AddressAutocomplete({ onSelect, placeholder = "Typ een adres of 
                 onClick={() => handleSelect(suggestion)}
                 className="w-full px-3 py-2.5 text-left hover:bg-white/10 transition-colors flex items-center gap-2 border-b border-white/5 last:border-0"
               >
-                <MapPin className="w-4 h-4 text-[#e94560] flex-shrink-0" />
+                <MapPin className="w-4 h-4 text-[#FF7A00] flex-shrink-0" />
                 <div className="flex-1 min-w-0">
                   <div className="text-white text-sm font-medium truncate">
                     {addr.road ? `${addr.road}${addr.house_number ? ` ${addr.house_number}` : ''}` : city}
@@ -189,7 +189,7 @@ export function AddressAutocomplete({ onSelect, placeholder = "Typ een adres of 
                     {addr.postcode && `${addr.postcode}, `}{city}
                   </div>
                 </div>
-                <div className="px-1.5 py-0.5 bg-[#e94560]/20 rounded text-[10px] text-[#e94560] font-medium flex-shrink-0">
+                <div className="px-1.5 py-0.5 bg-[#FF7A00]/20 rounded text-[10px] text-[#FF7A00] font-medium flex-shrink-0">
                   {city}
                 </div>
               </button>
