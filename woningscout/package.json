@@ -1,0 +1,32 @@
+{
+  "name": "woningscout",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@supabase/auth-helpers-nextjs": "^0.15.0",
+    "@supabase/ssr": "^0.8.0",
+    "@supabase/supabase-js": "^2.78.0",
+    "@types/three": "^0.181.0",
+    "apify-client": "^2.20.0",
+    "framer-motion": "^12.23.25",
+    "lucide-react": "^0.556.0",
+    "next": "14.2.33",
+    "react": "^18",
+    "react-dom": "^18",
+    "three": "^0.181.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}

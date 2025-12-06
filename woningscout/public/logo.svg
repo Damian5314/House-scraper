@@ -1,0 +1,15 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- House outline -->
+  <path d="M50 90L100 50L150 90V160H50V90Z" stroke="#2B7CB3" stroke-width="8" fill="none"/>
+  <path d="M150 70L165 82V160H150" stroke="#5BA3D0" stroke-width="8" fill="none"/>
+  
+  <!-- Magnifying glass circle -->
+  <circle cx="100" cy="115" r="35" stroke="#2B7CB3" stroke-width="8" fill="none"/>
+  <circle cx="100" cy="115" r="20" stroke="#2B7CB3" stroke-width="6" fill="none"/>
+  
+  <!-- Orange dot in center -->
+  <circle cx="100" cy="115" r="8" fill="#FF9933"/>
+  
+  <!-- Magnifying glass handle -->
+  <line x1="125" y1="140" x2="145" y2="160" stroke="#5BA3D0" stroke-width="10" stroke-linecap="round"/>
+</svg>
