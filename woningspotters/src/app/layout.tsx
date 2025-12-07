@@ -14,10 +14,18 @@ export const metadata: Metadata = {
   description: 'Doorzoek alle Nederlandse woningsites in één keer. Vind je droomwoning op Funda, Pararius en meer. Slim, snel en overzichtelijk.',
   keywords: ['woning', 'huis', 'kopen', 'huren', 'funda', 'nederland', 'vastgoed', 'makelaars'],
   authors: [{ name: 'WoningSpotters' }],
+  icons: {
+    icon: [
+      { url: '/logo.svg', type: 'image/svg+xml' },
+      { url: '/Logo.png', type: 'image/png' }
+    ],
+    apple: '/Logo.png',
+  },
   openGraph: {
     title: 'WoningSpotters - Vind jouw droomwoning',
     description: 'Doorzoek alle Nederlandse woningsites in één keer.',
     type: 'website',
+    images: [{ url: '/Logo.png' }],
   },
 };
 
