@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { PageTransition } from '../../components/PageTransition';
 import { Woning } from '@/types';
 import {
@@ -30,6 +31,11 @@ export default function WoningDetailPage() {
       setWoning(JSON.parse(storedWoning));
     }
   }, [params.id]);
+
+  const handleBack = () => {
+    // Ga altijd terug naar de homepage waar de zoekresultaten uit sessionStorage worden geladen
+    router.push('/');
+  };
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('nl-NL', {
@@ -66,7 +72,7 @@ export default function WoningDetailPage() {
         <div className="px-4 py-8">
           <div className="max-w-4xl mx-auto">
             <button
-              onClick={() => router.back()}
+              onClick={handleBack}
               className="flex items-center gap-2 text-white/70 hover:text-white mb-6 transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
@@ -87,7 +93,7 @@ export default function WoningDetailPage() {
         <div className="max-w-4xl mx-auto">
           {/* Terug knop */}
           <button
-            onClick={() => router.back()}
+            onClick={handleBack}
             className="flex items-center gap-2 text-white/70 hover:text-white mb-6 transition-colors group"
           >
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />

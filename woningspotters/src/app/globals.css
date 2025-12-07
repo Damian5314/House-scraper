@@ -220,3 +220,16 @@ button:focus {
     text-wrap: balance;
   }
 }
+
+/* Custom select dropdown styling */
+select option {
+  padding: 8px 12px;
+  background-color: #1a1a2e;
+  color: white;
+}
+
+select:focus option:checked,
+select option:checked {
+  background: linear-gradient(135deg, var(--accent) 0%, #FF9933 100%);
+  color: white;
+}

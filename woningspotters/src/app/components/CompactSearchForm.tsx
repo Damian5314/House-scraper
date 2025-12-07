@@ -165,10 +165,11 @@ export function CompactSearchForm({ onSearch, isLoading }: CompactSearchFormProp
             <select
               value={filters.minPrijs}
               onChange={(e) => setFilters({ ...filters, minPrijs: e.target.value })}
-              className="w-full px-4 py-3 md:py-4 bg-white/5 border border-white/10 rounded-xl text-white text-sm md:text-base focus:border-[#2B7CB3] focus:outline-none appearance-none cursor-pointer pr-10"
+              aria-label="Minimum prijs"
+              className="w-full px-4 py-3 md:py-4 bg-white/5 border border-white/10 rounded-xl text-white text-sm md:text-base focus:border-[#2B7CB3] focus:outline-none appearance-none cursor-pointer pr-10 hover:bg-white/10 transition-colors"
             >
               {minPriceOptions.map((option) => (
-                <option key={option.value} value={option.value} className="bg-[#1a1a2e]">
+                <option key={option.value} value={option.value}>
                   {option.label}
                 </option>
               ))}
@@ -180,10 +181,11 @@ export function CompactSearchForm({ onSearch, isLoading }: CompactSearchFormProp
             <select
               value={filters.maxPrijs}
               onChange={(e) => setFilters({ ...filters, maxPrijs: e.target.value })}
-              className="w-full px-4 py-3 md:py-4 bg-white/5 border border-white/10 rounded-xl text-white text-sm md:text-base focus:border-[#2B7CB3] focus:outline-none appearance-none cursor-pointer pr-10"
+              aria-label="Maximum prijs"
+              className="w-full px-4 py-3 md:py-4 bg-white/5 border border-white/10 rounded-xl text-white text-sm md:text-base focus:border-[#2B7CB3] focus:outline-none appearance-none cursor-pointer pr-10 hover:bg-white/10 transition-colors"
             >
               {maxPriceOptions.map((option) => (
-                <option key={option.value} value={option.value} className="bg-[#1a1a2e]">
+                <option key={option.value} value={option.value}>
                   {option.label}
                 </option>
               ))}
@@ -195,10 +197,11 @@ export function CompactSearchForm({ onSearch, isLoading }: CompactSearchFormProp
             <select
               value={filters.kamers}
               onChange={(e) => setFilters({ ...filters, kamers: e.target.value })}
-              className="w-full px-4 py-3 md:py-4 bg-white/5 border border-white/10 rounded-xl text-white text-sm md:text-base focus:border-[#2B7CB3] focus:outline-none appearance-none cursor-pointer pr-10"
+              aria-label="Aantal kamers"
+              className="w-full px-4 py-3 md:py-4 bg-white/5 border border-white/10 rounded-xl text-white text-sm md:text-base focus:border-[#2B7CB3] focus:outline-none appearance-none cursor-pointer pr-10 hover:bg-white/10 transition-colors"
             >
               {kamerOptions.map((option) => (
-                <option key={option.value} value={option.value} className="bg-[#1a1a2e]">
+                <option key={option.value} value={option.value}>
                   {option.label}
                 </option>
               ))}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { CompactSearchForm } from './components/CompactSearchForm';
 import { WoningCard, WoningCardSkeleton } from './components/WoningCard';
@@ -8,11 +8,25 @@ import { PageTransition } from './components/PageTransition';
 import { SearchFilters, Woning, SearchResponse } from '@/types';
 import { RefreshCw, AlertCircle, Home, ArrowLeft, MapPin } from 'lucide-react';
 
+const SEARCH_RESULTS_KEY = 'woningspotters_search_results';
+const SEARCH_FILTERS_KEY = 'woningspotters_search_filters';
+
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(false);
   const [results, setResults] = useState<Woning[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [searchedFilters, setSearchedFilters] = useState<SearchFilters | null>(null);
+
+  // Herstel zoekresultaten uit sessionStorage bij laden
+  useEffect(() => {
+    const storedResults = sessionStorage.getItem(SEARCH_RESULTS_KEY);
+    const storedFilters = sessionStorage.getItem(SEARCH_FILTERS_KEY);
+
+    if (storedResults && storedFilters) {
+      setResults(JSON.parse(storedResults));
+      setSearchedFilters(JSON.parse(storedFilters));
+    }
+  }, []);
 
   const handleSearch = async (filters: SearchFilters) => {
     setIsLoading(true);
@@ -30,6 +44,9 @@ export default function HomePage() {
 
       if (data.success && data.data) {
         setResults(data.data);
+        // Sla resultaten op in sessionStorage voor terug-navigatie
+        sessionStorage.setItem(SEARCH_RESULTS_KEY, JSON.stringify(data.data));
+        sessionStorage.setItem(SEARCH_FILTERS_KEY, JSON.stringify(filters));
       } else {
         setError(data.error || 'Er is een fout opgetreden bij het zoeken');
       }
@@ -45,6 +62,9 @@ export default function HomePage() {
     setResults(null);
     setSearchedFilters(null);
     setError(null);
+    // Verwijder opgeslagen resultaten uit sessionStorage
+    sessionStorage.removeItem(SEARCH_RESULTS_KEY);
+    sessionStorage.removeItem(SEARCH_FILTERS_KEY);
   };
 
   // Search view - centered on screen, no scroll
