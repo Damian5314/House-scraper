@@ -4,8 +4,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
-import { Home, Info, Heart, Search, CreditCard, User, LogOut, ChevronDown } from 'lucide-react';
+import { Home, Info, Heart, Search, CreditCard, User, LogOut, ChevronDown, Crown, Rocket } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
+import { createClient } from '@/lib/supabase';
 
 const navItems = [
   { href: '/', label: 'Home', icon: Home },
@@ -17,7 +18,30 @@ export function Navbar() {
   const pathname = usePathname();
   const { user, loading, signOut } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [subscriptionTier, setSubscriptionTier] = useState<string>('free');
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Fetch subscription tier
+  useEffect(() => {
+    async function fetchSubscription() {
+      if (!user) return;
+
+      const supabase = createClient();
+      if (!supabase) return;
+
+      const { data } = await supabase
+        .from('profiles')
+        .select('subscription_tier')
+        .eq('id', user.id)
+        .single();
+
+      if (data?.subscription_tier) {
+        setSubscriptionTier(data.subscription_tier);
+      }
+    }
+
+    fetchSubscription();
+  }, [user]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -111,7 +135,17 @@ export function Navbar() {
                     {/* User info */}
                     <div className="px-4 py-2 border-b border-white/10">
                       <p className="text-sm font-medium truncate">{user.email}</p>
-                      <p className="text-xs text-white/50">Gratis account</p>
+                      <p className={`text-xs flex items-center gap-1 ${
+                        subscriptionTier === 'ultra'
+                          ? 'text-[#a855f7]'
+                          : subscriptionTier === 'pro'
+                          ? 'text-[#e94560]'
+                          : 'text-white/50'
+                      }`}>
+                        {subscriptionTier === 'ultra' && <Rocket className="w-3 h-3" />}
+                        {subscriptionTier === 'pro' && <Crown className="w-3 h-3" />}
+                        {subscriptionTier === 'ultra' ? 'Ultra' : subscriptionTier === 'pro' ? 'Pro' : 'Gratis'} account
+                      </p>
                     </div>
 
                     {/* Menu items */}
@@ -124,14 +158,26 @@ export function Navbar() {
                         <Heart className="w-4 h-4" />
                         Mijn favorieten
                       </Link>
-                      <Link
-                        href="/pricing"
-                        onClick={() => setDropdownOpen(false)}
-                        className="flex items-center gap-3 px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/5 transition-all"
-                      >
-                        <CreditCard className="w-4 h-4" />
-                        Upgrade naar Pro
-                      </Link>
+                      {subscriptionTier === 'free' && (
+                        <Link
+                          href="/pricing"
+                          onClick={() => setDropdownOpen(false)}
+                          className="flex items-center gap-3 px-4 py-2 text-sm text-[#e94560] hover:bg-[#e94560]/10 transition-all"
+                        >
+                          <Crown className="w-4 h-4" />
+                          Upgrade naar Pro
+                        </Link>
+                      )}
+                      {subscriptionTier !== 'free' && (
+                        <Link
+                          href="/pricing"
+                          onClick={() => setDropdownOpen(false)}
+                          className="flex items-center gap-3 px-4 py-2 text-sm text-white/70 hover:text-white hover:bg-white/5 transition-all"
+                        >
+                          <CreditCard className="w-4 h-4" />
+                          Mijn abonnement
+                        </Link>
+                      )}
                     </div>
 
                     {/* Sign out */}

@@ -1,8 +1,10 @@
 'use client';
 
+import { useState } from 'react';
 import { PageTransition } from '../components/PageTransition';
-import { Check, Zap, Crown, Rocket } from 'lucide-react';
+import { Check, Zap, Crown, Rocket, Loader2 } from 'lucide-react';
 import Link from 'next/link';
+import { useAuth } from '@/context/AuthContext';
 
 const plans = [
   {
@@ -20,6 +22,7 @@ const plans = [
     href: '/login',
     popular: false,
     tier: 'free',
+    isPaid: false,
   },
   {
     id: 'plan-pro',
@@ -40,6 +43,7 @@ const plans = [
     href: '/login',
     popular: true,
     tier: 'pro',
+    isPaid: true,
   },
   {
     id: 'plan-ultra',
@@ -58,10 +62,53 @@ const plans = [
     href: '/login',
     popular: false,
     tier: 'ultra',
+    isPaid: true,
   },
 ];
 
 export default function PricingPage() {
+  const { user } = useAuth();
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubscribe = async (plan: string) => {
+    if (!user) {
+      // Redirect to login if not authenticated
+      window.location.href = '/login?redirect=/pricing';
+      return;
+    }
+
+    setLoadingPlan(plan);
+    setError(null);
+
+    try {
+      const response = await fetch('/api/mollie/create-payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          plan,
+          userId: user.id,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Er ging iets mis');
+      }
+
+      // Redirect to Mollie checkout
+      if (data.checkoutUrl) {
+        window.location.href = data.checkoutUrl;
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Er ging iets mis');
+      setLoadingPlan(null);
+    }
+  };
+
   return (
     <PageTransition>
       <div className="min-h-screen px-4 py-8">
@@ -76,12 +123,20 @@ export default function PricingPage() {
             </p>
           </div>
 
+          {/* Error message */}
+          {error && (
+            <div className="mb-6 p-4 bg-red-500/10 border border-red-500/30 rounded-lg text-center">
+              <p className="text-red-400">{error}</p>
+            </div>
+          )}
+
           {/* Plans grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 items-center">
             {plans.map((plan) => {
               const Icon = plan.icon;
               const isPro = plan.tier === 'pro';
               const isUltra = plan.tier === 'ultra';
+              const isLoading = loadingPlan === plan.tier;
 
               return (
                 <div
@@ -156,18 +211,41 @@ export default function PricingPage() {
                   </ul>
 
                   {/* CTA Button */}
-                  <Link
-                    href={plan.href}
-                    className={`w-full py-2.5 rounded-lg font-medium text-center text-sm transition-all ${
-                      isPro
-                        ? 'btn-gradient hover:shadow-lg hover:shadow-[#e94560]/40 hover:scale-[1.02]'
-                        : isUltra
-                        ? 'bg-gradient-to-r from-[#a855f7] to-[#6366f1] hover:shadow-lg hover:shadow-[#a855f7]/30 hover:scale-[1.02]'
-                        : 'bg-white/10 hover:bg-white/20'
-                    }`}
-                  >
-                    {plan.cta}
-                  </Link>
+                  {plan.isPaid ? (
+                    <button
+                      onClick={() => handleSubscribe(plan.tier)}
+                      disabled={isLoading || loadingPlan !== null}
+                      className={`w-full py-2.5 rounded-lg font-medium text-center text-sm transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
+                        isPro
+                          ? 'btn-gradient hover:shadow-lg hover:shadow-[#e94560]/40 hover:scale-[1.02]'
+                          : isUltra
+                          ? 'bg-gradient-to-r from-[#a855f7] to-[#6366f1] hover:shadow-lg hover:shadow-[#a855f7]/30 hover:scale-[1.02]'
+                          : 'bg-white/10 hover:bg-white/20'
+                      }`}
+                    >
+                      {isLoading ? (
+                        <span className="flex items-center justify-center gap-2">
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          Laden...
+                        </span>
+                      ) : (
+                        plan.cta
+                      )}
+                    </button>
+                  ) : (
+                    <Link
+                      href={plan.href}
+                      className={`w-full py-2.5 rounded-lg font-medium text-center text-sm transition-all block ${
+                        isPro
+                          ? 'btn-gradient hover:shadow-lg hover:shadow-[#e94560]/40 hover:scale-[1.02]'
+                          : isUltra
+                          ? 'bg-gradient-to-r from-[#a855f7] to-[#6366f1] hover:shadow-lg hover:shadow-[#a855f7]/30 hover:scale-[1.02]'
+                          : 'bg-white/10 hover:bg-white/20'
+                      }`}
+                    >
+                      {plan.cta}
+                    </Link>
+                  )}
                 </div>
               );
             })}
