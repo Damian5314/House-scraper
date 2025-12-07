@@ -4,11 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
-<<<<<<< HEAD:woningscout/src/app/components/Navbar.tsx
-import { Home, Info, Heart, Search, CreditCard, User, LogOut, ChevronDown, Crown, Rocket } from 'lucide-react';
-=======
-import { Home, Info, Heart, Search, CreditCard, User, LogOut, ChevronDown, Mail, Newspaper } from 'lucide-react';
->>>>>>> 18ff81e68440942481a9a6961dfb0069fc69c778:woningspotters/src/app/components/Navbar.tsx
+import { Home, Info, Heart, Search, CreditCard, User, LogOut, ChevronDown, Crown, Rocket, Mail, Newspaper } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { createClient } from '@/lib/supabase';
 

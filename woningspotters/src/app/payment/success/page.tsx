@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { PageTransition } from '@/app/components/PageTransition';
 import { CheckCircle, Loader2, XCircle } from 'lucide-react';
@@ -9,7 +9,7 @@ import { useAuth } from '@/context/AuthContext';
 
 type Status = 'verifying' | 'success' | 'failed' | 'canceled';
 
-export default function PaymentSuccessPage() {
+function PaymentSuccessContent() {
   const searchParams = useSearchParams();
   const plan = searchParams.get('plan');
   const { user } = useAuth();
@@ -71,7 +71,7 @@ export default function PaymentSuccessPage() {
         <div className="glass rounded-2xl p-8 max-w-md w-full text-center">
           {status === 'verifying' && (
             <>
-              <Loader2 className="w-16 h-16 text-[#e94560] mx-auto mb-4 animate-spin" />
+              <Loader2 className="w-16 h-16 text-[#FF7A00] mx-auto mb-4 animate-spin" />
               <h1 className="text-2xl font-bold mb-2">Betaling verifiëren...</h1>
               <p className="text-white/50">Even geduld alsjeblieft.</p>
             </>
@@ -84,7 +84,7 @@ export default function PaymentSuccessPage() {
               <p className="text-white/50 mb-6">{errorMessage}</p>
               <Link
                 href="/pricing"
-                className="block w-full py-3 rounded-lg btn-gradient font-medium hover:shadow-lg hover:shadow-[#e94560]/30 transition-all"
+                className="block w-full py-3 rounded-lg btn-gradient font-medium hover:shadow-lg hover:shadow-[#FF7A00]/30 transition-all"
               >
                 Probeer opnieuw
               </Link>
@@ -99,12 +99,12 @@ export default function PaymentSuccessPage() {
               <div className="space-y-3">
                 <Link
                   href="/pricing"
-                  className="block w-full py-3 rounded-lg btn-gradient font-medium hover:shadow-lg hover:shadow-[#e94560]/30 transition-all"
+                  className="block w-full py-3 rounded-lg btn-gradient font-medium hover:shadow-lg hover:shadow-[#FF7A00]/30 transition-all"
                 >
                   Terug naar prijzen
                 </Link>
                 <Link
-                  href="/about"
+                  href="/contact"
                   className="block w-full py-3 rounded-lg bg-white/10 font-medium hover:bg-white/20 transition-all"
                 >
                   Contact opnemen
@@ -118,12 +118,12 @@ export default function PaymentSuccessPage() {
               <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
               <h1 className="text-2xl font-bold mb-2">Betaling geslaagd!</h1>
               <p className="text-white/50 mb-6">
-                Welkom bij WoningScout {planName}! Je abonnement is nu actief.
+                Welkom bij WoningSpotters {planName}! Je abonnement is nu actief.
               </p>
               <div className="space-y-3">
                 <Link
                   href="/"
-                  className="block w-full py-3 rounded-lg btn-gradient font-medium hover:shadow-lg hover:shadow-[#e94560]/30 transition-all"
+                  className="block w-full py-3 rounded-lg btn-gradient font-medium hover:shadow-lg hover:shadow-[#FF7A00]/30 transition-all"
                 >
                   Start met zoeken
                 </Link>
@@ -139,5 +139,22 @@ export default function PaymentSuccessPage() {
         </div>
       </div>
     </PageTransition>
+  );
+}
+
+export default function PaymentSuccessPage() {
+  return (
+    <Suspense fallback={
+      <PageTransition>
+        <div className="min-h-screen flex items-center justify-center px-4">
+          <div className="glass rounded-2xl p-8 max-w-md w-full text-center">
+            <Loader2 className="w-16 h-16 text-[#FF7A00] mx-auto mb-4 animate-spin" />
+            <h1 className="text-2xl font-bold mb-2">Laden...</h1>
+          </div>
+        </div>
+      </PageTransition>
+    }>
+      <PaymentSuccessContent />
+    </Suspense>
   );
 }

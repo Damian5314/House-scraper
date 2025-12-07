@@ -15,14 +15,14 @@ export const PLANS = {
     amount: '9.00',
     currency: 'EUR',
     interval: '1 month',
-    description: 'WoningScout Pro - Maandelijks abonnement',
+    description: 'WoningSpotters Pro - Maandelijks abonnement',
   },
   ultra: {
     name: 'Ultra',
     amount: '29.00',
     currency: 'EUR',
     interval: '1 month',
-    description: 'WoningScout Ultra - Maandelijks abonnement',
+    description: 'WoningSpotters Ultra - Maandelijks abonnement',
   },
 } as const;
 

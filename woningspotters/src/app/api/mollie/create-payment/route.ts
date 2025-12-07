@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { mollieClient, PLANS, PlanType } from '@/lib/mollie';
 import { createServerClient } from '@/lib/supabase-server';
+import { SequenceType } from '@mollie/api-client';
 
 export async function POST(request: NextRequest) {
   try {
@@ -64,23 +65,32 @@ export async function POST(request: NextRequest) {
     // For test mode without recurring methods, we use 'oneoff' sequence type
     const isTestMode = process.env.MOLLIE_API_KEY?.startsWith('test_');
 
-    const payment = await mollieClient.payments.create({
+    const paymentData: Parameters<typeof mollieClient.payments.create>[0] = {
       amount: {
         currency: planConfig.currency,
         value: planConfig.amount,
       },
       customerId,
-      // Use 'first' for live mode (enables recurring), 'oneoff' for test mode
-      ...(isTestMode ? {} : { sequenceType: 'first' }),
       description: planConfig.description,
       redirectUrl: `${baseUrl}/payment/success?plan=${plan}`,
-      ...(isLocalhost ? {} : { webhookUrl: `${baseUrl}/api/mollie/webhook` }),
       metadata: {
         userId,
         plan,
         type: 'subscription_setup',
       },
-    });
+    };
+
+    // Add sequenceType for live mode (enables recurring)
+    if (!isTestMode) {
+      paymentData.sequenceType = SequenceType.first;
+    }
+
+    // Add webhookUrl for non-localhost
+    if (!isLocalhost) {
+      paymentData.webhookUrl = `${baseUrl}/api/mollie/webhook`;
+    }
+
+    const payment = await mollieClient.payments.create(paymentData);
 
     // Create pending subscription record
     await supabase.from('subscriptions').insert({
