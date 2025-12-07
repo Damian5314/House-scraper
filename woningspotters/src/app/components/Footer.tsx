@@ -75,7 +75,7 @@ export function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-2 text-white/50">
                 <Mail className="w-4 h-4 text-[#FF7A00]" />
-                info@woningspotters.nl
+                info@woningspotter.nl
               </li>
               <li className="flex items-center gap-2 text-white/50">
                 <Phone className="w-4 h-4 text-[#FF7A00]" />
