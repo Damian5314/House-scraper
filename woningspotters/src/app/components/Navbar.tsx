@@ -4,11 +4,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
-import { Home, Info, Heart, Search, CreditCard, User, LogOut, ChevronDown, Mail } from 'lucide-react';
+import { Home, Info, Heart, Search, CreditCard, User, LogOut, ChevronDown, Mail, Newspaper } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
 const navItems = [
   { href: '/', label: 'Home', icon: Home },
+  { href: '/nieuws', label: 'Nieuws', icon: Newspaper },
   { href: '/pricing', label: 'Prijzen', icon: CreditCard },
   { href: '/about', label: 'Over ons', icon: Info },
   { href: '/contact', label: 'Contact', icon: Mail },
