@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { PageTransition } from '../components/PageTransition';
 import { Calendar, Clock, ArrowRight, TrendingUp, Home, Gavel, Building2, Landmark, CheckCircle, Loader2, Mail } from 'lucide-react';
 import Link from 'next/link';
-import { createClient } from '@/lib/supabase';
 
 interface NewsArticle {
   id: string;
@@ -126,26 +125,16 @@ export default function NieuwsPage() {
     setIsSubmitting(true);
 
     try {
-      const supabase = createClient();
+      const response = await fetch('/api/newsletter/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
 
-      if (!supabase) {
-        // Demo mode - simulate success
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        setIsSubscribed(true);
-        setEmail('');
-        return;
-      }
+      const data = await response.json();
 
-      const { error: insertError } = await supabase
-        .from('newsletter_subscribers')
-        .insert({ email });
-
-      if (insertError) {
-        if (insertError.code === '23505') {
-          setError('Dit e-mailadres is al aangemeld.');
-        } else {
-          setError('Er ging iets mis. Probeer het opnieuw.');
-        }
+      if (!response.ok) {
+        setError(data.error || 'Er ging iets mis. Probeer het opnieuw.');
       } else {
         setIsSubscribed(true);
         setEmail('');
