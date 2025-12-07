@@ -4,8 +4,9 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { PageTransition } from '../components/PageTransition';
 import { useAuth } from '@/context/AuthContext';
-import { Mail, Lock, ArrowRight, Eye, EyeOff, Home } from 'lucide-react';
+import { Mail, Lock, ArrowRight, Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function LoginPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -57,8 +58,8 @@ export default function LoginPage() {
         <div className="w-full max-w-md">
           {/* Logo */}
           <Link href="/" className="flex items-center justify-center gap-3 mb-8">
-            <div className="w-10 h-10 btn-gradient rounded-xl flex items-center justify-center shadow-lg shadow-[#FF7A00]/30">
-              <Home className="w-5 h-5 text-white" />
+            <div className="w-12 h-12 rounded-lg flex items-center justify-center">
+              <Image src="/logo.svg" alt="WoningSpotters" width={48} height={48} priority />
             </div>
             <span className="text-xl font-bold tracking-tight">WoningSpotters</span>
           </Link>
