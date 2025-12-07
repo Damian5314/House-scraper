@@ -7,7 +7,7 @@ import Link from 'next/link';
 export default function FavoritesPage() {
   return (
     <PageTransition>
-      <div className="min-h-screen flex items-center justify-center px-4 py-8">
+      <div className="min-h-[60vh] flex items-center justify-center px-4 py-8">
         <div className="text-center max-w-md">
           {/* Empty state */}
           <div className="w-20 h-20 mx-auto mb-6 bg-white/5 rounded-full flex items-center justify-center">
@@ -23,7 +23,7 @@ export default function FavoritesPage() {
           {/* Feature preview */}
           <div className="glass rounded-xl p-6 mb-6 text-left">
             <h3 className="font-medium mb-3 flex items-center gap-2">
-              <Home className="w-4 h-4 text-[#e94560]" />
+              <Home className="w-4 h-4 text-[#FF7A00]" />
               Binnenkort beschikbaar
             </h3>
             <ul className="text-sm text-white/50 space-y-2">
@@ -36,7 +36,7 @@ export default function FavoritesPage() {
 
           <Link
             href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 btn-gradient rounded-xl font-medium hover:shadow-lg hover:shadow-[#e94560]/30 transition-shadow"
+            className="inline-flex items-center gap-2 px-6 py-3 btn-gradient rounded-xl font-medium hover:shadow-lg hover:shadow-[#FF7A00]/30 transition-shadow"
           >
             Start met zoeken <ArrowRight className="w-4 h-4" />
           </Link>

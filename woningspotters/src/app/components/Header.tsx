@@ -8,9 +8,9 @@ export function Header() {
     <header className="text-center mb-12 md:mb-16">
       <div className="inline-flex items-center gap-3 mb-6">
         <div className="w-12 h-12 rounded-xl flex items-center justify-center">
-          <Image src="/logo.svg" alt="WoningScout Logo" width={48} height={48} priority />
+          <Image src="/logo.svg" alt="WoningSpotters Logo" width={48} height={48} priority />
         </div>
-        <span className="text-2xl font-bold tracking-tight">WoningScout</span>
+        <span className="text-2xl font-bold tracking-tight">WoningSpotters</span>
       </div>
       <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 gradient-text tracking-tight">
         Vind jouw droomwoning

@@ -1,0 +1,9 @@
+{
+    "actorSpecification": 1,
+    "name": "woningspotters",
+    "title": "WoningSpotters",
+    "version": "0.0",
+    "buildTag": "latest",
+    "input": "../INPUT_SCHEMA.json",
+    "dockerfile": "../Dockerfile"
+}

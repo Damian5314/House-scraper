@@ -53,14 +53,14 @@ export default function LoginPage() {
 
   return (
     <PageTransition>
-      <div className="min-h-screen flex items-center justify-center px-4 py-8">
+      <div className="min-h-[60vh] flex items-center justify-center px-4 py-8">
         <div className="w-full max-w-md">
           {/* Logo */}
           <Link href="/" className="flex items-center justify-center gap-3 mb-8">
-            <div className="w-10 h-10 btn-gradient rounded-xl flex items-center justify-center shadow-lg shadow-[#e94560]/30">
+            <div className="w-10 h-10 btn-gradient rounded-xl flex items-center justify-center shadow-lg shadow-[#FF7A00]/30">
               <Home className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold tracking-tight">WoningScout</span>
+            <span className="text-xl font-bold tracking-tight">WoningSpotters</span>
           </Link>
 
           {/* Card */}
@@ -80,7 +80,7 @@ export default function LoginPage() {
                 type="button"
                 onClick={() => setIsLogin(true)}
                 className={`flex-1 py-2 text-sm font-medium rounded-md transition-all ${
-                  isLogin ? 'bg-[#e94560] text-white' : 'text-white/60 hover:text-white'
+                  isLogin ? 'bg-[#FF7A00] text-white' : 'text-white/60 hover:text-white'
                 }`}
               >
                 Inloggen
@@ -89,7 +89,7 @@ export default function LoginPage() {
                 type="button"
                 onClick={() => setIsLogin(false)}
                 className={`flex-1 py-2 text-sm font-medium rounded-md transition-all ${
-                  !isLogin ? 'bg-[#e94560] text-white' : 'text-white/60 hover:text-white'
+                  !isLogin ? 'bg-[#FF7A00] text-white' : 'text-white/60 hover:text-white'
                 }`}
               >
                 Registreren
@@ -111,7 +111,7 @@ export default function LoginPage() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="naam@voorbeeld.nl"
                     required
-                    className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:border-[#e94560] focus:ring-1 focus:ring-[#e94560] transition-all"
+                    className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:border-[#2B7CB3] focus:ring-1 focus:ring-[#2B7CB3] transition-all"
                   />
                 </div>
               </div>
@@ -130,7 +130,7 @@ export default function LoginPage() {
                     placeholder="••••••••"
                     required
                     minLength={6}
-                    className="w-full pl-10 pr-10 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:border-[#e94560] focus:ring-1 focus:ring-[#e94560] transition-all"
+                    className="w-full pl-10 pr-10 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:border-[#2B7CB3] focus:ring-1 focus:ring-[#2B7CB3] transition-all"
                   />
                   <button
                     type="button"

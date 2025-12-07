@@ -111,7 +111,7 @@ export default function PricingPage() {
 
   return (
     <PageTransition>
-      <div className="min-h-screen px-4 py-8">
+      <div className="px-4 py-8 pb-16">
         <div className="max-w-5xl mx-auto">
           {/* Header */}
           <div className="text-center mb-10">
@@ -152,7 +152,7 @@ export default function PricingPage() {
                 >
                   {/* Popular badge - only for Pro */}
                   {isPro && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#e94560] rounded-full text-xs font-semibold whitespace-nowrap shadow-lg shadow-[#e94560]/30">
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[#FF7A00] rounded-full text-xs font-semibold whitespace-nowrap shadow-lg shadow-[#e94560]/30">
                       Meest gekozen
                     </div>
                   )}
@@ -255,7 +255,7 @@ export default function PricingPage() {
           <div className="mt-10 text-center">
             <p className="text-white/40 text-sm">
               Vragen over prijzen?{' '}
-              <Link href="/about" className="text-[#e94560] hover:underline">
+              <Link href="/contact" className="text-[#5BA3D0] hover:underline">
                 Neem contact op
               </Link>
             </p>

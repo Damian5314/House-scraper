@@ -51,15 +51,15 @@ export default function HomePage() {
   if (!results && !isLoading && !error) {
     return (
       <PageTransition>
-      <div className="min-h-screen flex flex-col justify-start pt-[15vh] px-4 overflow-hidden">
+      <div className="min-h-[70vh] flex flex-col justify-start pt-[15vh] px-4">
         <div className="max-w-2xl mx-auto w-full">
           {/* Logo & Title */}
           <div className="text-center mb-6">
             <div className="inline-flex items-center gap-3 mb-3">
               <div className="w-12 h-12 rounded-xl flex items-center justify-center">
-                <Image src="/logo.svg" alt="WoningScout Logo" width={48} height={48} priority />
+                <Image src="/logo.svg" alt="WoningSpotters Logo" width={48} height={48} priority />
               </div>
-              <span className="text-2xl font-bold tracking-tight">WoningScout</span>
+              <span className="text-2xl font-bold tracking-tight">WoningSpotters</span>
             </div>
             <h1 className="text-3xl md:text-4xl font-bold gradient-text mb-2">
               Vind jouw droomwoning
@@ -81,7 +81,7 @@ export default function HomePage() {
   if (isLoading) {
     return (
       <PageTransition>
-      <div className="min-h-screen flex flex-col px-4 py-6 overflow-hidden">
+      <div className="min-h-[60vh] flex flex-col px-4 py-6">
         <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col">
           {/* Header */}
           <div className="flex items-center gap-4 mb-6">
@@ -106,7 +106,7 @@ export default function HomePage() {
             <div className="text-center">
               <div className="w-16 h-16 mx-auto mb-4 relative">
                 <div className="absolute inset-0 border-4 border-white/10 rounded-full" />
-                <div className="absolute inset-0 border-4 border-transparent border-t-[#e94560] rounded-full animate-spin" />
+                <div className="absolute inset-0 border-4 border-transparent border-t-[#FF7A00] rounded-full animate-spin" />
               </div>
               <p className="text-white/60 text-sm">Even geduld...</p>
             </div>
@@ -121,7 +121,7 @@ export default function HomePage() {
   if (error) {
     return (
       <PageTransition>
-      <div className="min-h-screen flex items-center justify-center px-4 overflow-hidden">
+      <div className="min-h-[60vh] flex items-center justify-center px-4">
         <div className="text-center max-w-sm">
           <div className="w-14 h-14 mx-auto mb-4 bg-red-500/20 rounded-full flex items-center justify-center">
             <AlertCircle className="w-7 h-7 text-red-400" />
@@ -144,7 +144,7 @@ export default function HomePage() {
   // Results view
   return (
     <PageTransition>
-    <div className="min-h-screen flex flex-col px-4 py-4">
+    <div className="pb-8 flex flex-col px-4 py-4">
       <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between gap-4 mb-4 flex-shrink-0">
@@ -159,7 +159,7 @@ export default function HomePage() {
             </button>
             <div>
               <h2 className="text-lg font-semibold">
-                <span className="text-[#e94560]">{results?.length || 0}</span> woningen
+                <span className="text-[#FF7A00]">{results?.length || 0}</span> woningen
               </h2>
               {searchedFilters && (
                 <p className="text-white/50 text-xs flex items-center gap-1">

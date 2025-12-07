@@ -4,14 +4,20 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
+<<<<<<< HEAD:woningscout/src/app/components/Navbar.tsx
 import { Home, Info, Heart, Search, CreditCard, User, LogOut, ChevronDown, Crown, Rocket } from 'lucide-react';
+=======
+import { Home, Info, Heart, Search, CreditCard, User, LogOut, ChevronDown, Mail, Newspaper } from 'lucide-react';
+>>>>>>> 18ff81e68440942481a9a6961dfb0069fc69c778:woningspotters/src/app/components/Navbar.tsx
 import { useAuth } from '@/context/AuthContext';
 import { createClient } from '@/lib/supabase';
 
 const navItems = [
   { href: '/', label: 'Home', icon: Home },
+  { href: '/nieuws', label: 'Nieuws', icon: Newspaper },
   { href: '/pricing', label: 'Prijzen', icon: CreditCard },
   { href: '/about', label: 'Over ons', icon: Info },
+  { href: '/contact', label: 'Contact', icon: Mail },
 ];
 
 export function Navbar() {
@@ -72,9 +78,9 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             <div className="w-8 h-8 rounded-lg flex items-center justify-center">
-              <Image src="/logo.svg" alt="WoningScout" width={32} height={32} priority />
+              <Image src="/logo.svg" alt="WoningSpotters" width={32} height={32} priority />
             </div>
-            <span className="font-bold text-base">WoningScout</span>
+            <span className="font-bold text-base">WoningSpotters</span>
           </Link>
 
           {/* Center Navigation Links */}
@@ -89,7 +95,7 @@ export function Navbar() {
                   href={item.href}
                   className={`px-3 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition-all ${
                     isActive
-                      ? 'bg-[#e94560]/20 text-[#e94560]'
+                      ? 'bg-[#2B7CB3]/20 text-[#5BA3D0]'
                       : 'text-white/70 hover:text-white hover:bg-white/5'
                   }`}
                 >
@@ -107,7 +113,7 @@ export function Navbar() {
               href="/favorites"
               className={`p-2 rounded-lg transition-all ${
                 pathname === '/favorites'
-                  ? 'bg-[#e94560]/20 text-[#e94560]'
+                  ? 'bg-[#2B7CB3]/20 text-[#5BA3D0]'
                   : 'text-white/70 hover:text-white hover:bg-white/5'
               }`}
             >
@@ -197,7 +203,7 @@ export function Navbar() {
               /* Not logged in - Login button */
               <Link
                 href="/login"
-                className="px-4 py-2 btn-gradient rounded-lg text-sm font-medium flex items-center gap-2 hover:shadow-lg hover:shadow-[#e94560]/30 transition-all"
+                className="px-4 py-2 btn-gradient rounded-lg text-sm font-medium flex items-center gap-2 hover:shadow-lg hover:shadow-[#FF7A00]/30 transition-all"
               >
                 <User className="w-4 h-4" />
                 <span className="hidden sm:inline">Inloggen</span>

@@ -1,8 +1,12 @@
 {
   "permissions": {
     "allow": [
+<<<<<<< HEAD
       "Bash(npm install:*)",
       "Bash(ls:*)"
+=======
+      "Bash(mkdir:*)"
+>>>>>>> 18ff81e68440942481a9a6961dfb0069fc69c778
     ],
     "deny": [],
     "ask": []
