@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getMollieClient, PLANS, PlanType } from '@/lib/mollie';
 import { createServerClient } from '@/lib/supabase-server';
+import { sendSubscriptionWelcomeEmail } from '@/lib/subscription-emails';
 
 export async function POST(request: NextRequest) {
   try {
@@ -67,6 +68,21 @@ export async function POST(request: NextRequest) {
           updated_at: new Date().toISOString(),
         })
         .eq('id', userId);
+
+      // Send welcome email
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('email, full_name')
+        .eq('id', userId)
+        .single();
+
+      if (profile?.email) {
+        await sendSubscriptionWelcomeEmail({
+          to: profile.email,
+          plan,
+          customerName: profile.full_name || undefined,
+        });
+      }
     }
 
     // Handle recurring payment
