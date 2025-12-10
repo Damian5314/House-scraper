@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerClient } from '@/lib/supabase-server';
-import { getMollieClient } from '@/lib/mollie';
+import { getMollieClient, PlanType } from '@/lib/mollie';
+import { sendSubscriptionWelcomeEmail } from '@/lib/subscription-emails';
 
 // This endpoint manually activates a subscription after payment
 // Used for localhost testing where webhooks don't work
@@ -100,6 +101,16 @@ export async function POST(request: NextRequest) {
         { error: 'Profile not found' },
         { status: 404 }
       );
+    }
+
+    // Send welcome email
+    const profile = updatedProfile[0];
+    if (profile?.email) {
+      await sendSubscriptionWelcomeEmail({
+        to: profile.email,
+        plan: plan as PlanType,
+        customerName: profile.full_name || undefined,
+      });
     }
 
     return NextResponse.json({ success: true, subscription_tier: plan });
