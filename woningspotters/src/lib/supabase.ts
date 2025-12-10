@@ -3,11 +3,11 @@
 import { createBrowserClient } from '@supabase/ssr';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY;
 
 // Check if Supabase is properly configured
 const isConfigured = supabaseUrl &&
-  supabaseAnonKey &&
+  supabaseKey &&
   supabaseUrl !== 'your_supabase_url' &&
   supabaseUrl.includes('supabase.co');
 
@@ -21,7 +21,7 @@ export function createClient() {
   }
 
   if (!client) {
-    client = createBrowserClient(supabaseUrl!, supabaseAnonKey!);
+    client = createBrowserClient(supabaseUrl!, supabaseKey!);
   }
 
   return client;

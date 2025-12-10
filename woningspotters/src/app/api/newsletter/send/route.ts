@@ -3,7 +3,7 @@ import { createClient } from '@supabase/supabase-js';
 import { Resend } from 'resend';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+const supabaseServiceKey = process.env.SUPABASE_SECRET_KEY!;
 const resendApiKey = process.env.RESEND_API_KEY!;
 const newsletterApiKey = process.env.NEWSLETTER_API_KEY; // Secret key to protect this endpoint
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://woningspotters.nl';
